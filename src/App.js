@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import AddToDo from './components/AddToDo';
+import { Typography } from '@material-ui/core';
+
 
 function App() {
+  const [todo, setToDo] = useState([]); //list of todo's
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Typography variant='h4' >TO DO LIST</Typography>
+      <div className='add-todo'>
+        <AddToDo/>
+      </div>
+
     </div>
-  );
+  )
 }
 
 export default App;
