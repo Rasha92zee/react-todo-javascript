@@ -4,7 +4,7 @@ import AddToDo from "./components/AddToDo";
 import { Snackbar, Typography } from '@material-ui/core';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
-import { query, collection, doc, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { query, collection, doc, getDocs, addDoc, deleteDoc, serverTimestamp, docRef } from "firebase/firestore";
 import { db } from "./firebase";
 import loading from "./loading.gif";
 
@@ -56,6 +56,12 @@ function App() {
   post()
 }
 
+function deleteToDo(id){
+  const docRef = doc(db, collectionName, id)
+  deleteDoc(docRef)
+  fetchData()
+}
+
 return (
   <div className='app'>
     <Typography variant='h4' >TO DO LIST</Typography>
@@ -63,7 +69,8 @@ return (
       <AddToDo onAddToDo={addToDo} />
     </div>
     { isLoading && <img src={loading} alt="loading.." /> }
-    { !isLoading && <TodoList todos={todos} /> }  
+    { !isLoading && <TodoList todos={todos} onDelete = {deleteToDo} /> }  
+
 
     <Footer />
     <Snackbar open={sbOpen} autoHideDuration={2000} onClose={handleSbClose}
