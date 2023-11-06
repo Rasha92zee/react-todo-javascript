@@ -1,8 +1,13 @@
+import { ListItem, List } from '@material-ui/core'
 import React from 'react'
 
-function TodoList() {
+function TodoList(props) {
+  const todos = props.todos
   return (
-    <div>TodoList</div>
+    todos.map(todo => 
+      <List className="list" >
+        <ListItem className='list-item' key = {todo.id} >{todo.item.title}</ListItem>
+      </List>)
   )
 }
 
